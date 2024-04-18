@@ -1,4 +1,5 @@
 	.code16
+	.global _start
 _start:
 	mov $'H', %al
 	call print
