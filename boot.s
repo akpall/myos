@@ -1,23 +1,26 @@
 	.code16
 _start:
-	mov $0x0e, %ah
-
 	mov $'H', %al
-	int $0x10
+	call print
 
 	mov $'e', %al
-	int $0x10
+	call print
 
 	mov $'l', %al
-	int $0x10
+	call print
 
 	mov $'l', %al
-	int $0x10
+	call print
 
 	mov $'o', %al
-	int $0x10
+	call print
 
 	jmp .
+
+print:
+	mov $0x0e, %ah
+	int $0x10
+	ret
 
 	.space 510 - (. - _start)
 	.short 0xaa55
