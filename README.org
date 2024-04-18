@@ -2,15 +2,9 @@
 I am trying to follow it
 
 * Useful links
-- https://sourceware.org/binutils/docs/as/index.html
-Using as
-- https://www.felixcloutier.com/x86/
-x86 and amd64 instruction reference
-- https://en.wikipedia.org/wiki/BIOS_interrupt_call
-bios interrupt calls
-- https://en.wikibooks.org/wiki/X86_Assembly/X86_Architecture
-x86 Assembly/X86 Architecture
-- https://cs.lmu.edu/~ray/notes/gasexamples/
-GNU Assembler Examples
-- https://en.wikipedia.org/wiki/X86_instruction_listings
-x86 instruction listings
+[[https://sourceware.org/binutils/docs/as/index.html][Using as]]
+[[https://www.felixcloutier.com/x86/][x86 and amd64 instruction reference]]
+[[https://en.wikipedia.org/wiki/BIOS_interrupt_call][bios interrupt calls]]
+[[https://en.wikibooks.org/wiki/X86_Assembly/X86_Architecture][x86 Assembly/X86 Architecture]]
+[[https://cs.lmu.edu/~ray/notes/gasexamples/][GNU Assembler Examples]]
+[[https://en.wikipedia.org/wiki/X86_instruction_listings][x86 instruction listings]]
