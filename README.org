@@ -12,3 +12,5 @@ bios interrupt calls
 x86 Assembly/X86 Architecture
 - https://cs.lmu.edu/~ray/notes/gasexamples/
 GNU Assembler Examples
+- https://en.wikipedia.org/wiki/X86_instruction_listings
+x86 instruction listings
