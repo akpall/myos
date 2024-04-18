@@ -9,3 +9,6 @@ boot.o: boot.s
 		--32 \
 		-o boot.o \
 		boot.s
+
+clean:
+	rm boot.o boot.bin
