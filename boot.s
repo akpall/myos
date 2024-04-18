@@ -14,10 +14,11 @@ print:
 print_string:
 	lodsb
 	or %al, %al
-	jz print_string_return
+	jz return
 	call print
 	jmp print_string
-print_string_return:
+
+return:
 	ret
 
 hello:
