@@ -1,4 +1,4 @@
-.code16
+	.code16
 _start:
 	mov $0x0e, %ah
 
