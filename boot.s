@@ -52,6 +52,9 @@ print_hex:
 	mov %ax, %si
 	mov (%si),%ax
 	call print
+
+	mov $' ', %al
+	call print
 	ret
 
 return:
