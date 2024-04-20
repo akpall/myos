@@ -19,13 +19,13 @@ print_string:
 	jmp print_string
 
 print_hex:
-	mov $hex_start, %si
+	mov $HEX_START, %si
 	call print_string
 
 	mov %dx, %ax
 	and $0xf000, %ax
 	shr $12, %ax
-	add $hex_codes, %ax
+	add $HEX_CODES, %ax
 	mov %ax, %si
 	mov (%si),%ax
 	call print
@@ -33,7 +33,7 @@ print_hex:
 	mov %dx, %ax
 	and $0xf00, %ax
 	shr $8, %ax
-	add $hex_codes, %ax
+	add $HEX_CODES, %ax
 	mov %ax, %si
 	mov (%si),%ax
 	call print
@@ -41,25 +41,26 @@ print_hex:
 	mov %dx, %ax
 	and $0xf0, %ax
 	shr $4, %ax
-	add $hex_codes, %ax
+	add $HEX_CODES, %ax
 	mov %ax, %si
 	mov (%si),%ax
 	call print
 
 	mov %dx, %ax
 	and $0xf, %ax
-	add $hex_codes, %ax
+	add $HEX_CODES, %ax
 	mov %ax, %si
 	mov (%si),%ax
 	call print
+	ret
 
 return:
 	ret
 
-hex_start:
+HEX_START:
 	.asciz "0x"
 
-hex_codes:
+HEX_CODES:
 	.ascii "0123456789abcdef"
 
 	.space 510 - (. - _start)
