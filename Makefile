@@ -1,20 +1,20 @@
-boot.bin: boot.o
+asm/boot.bin: asm/boot.o
 	ld \
 		-Ttext=0x7c00 \
 		--oformat binary \
 		-m elf_i386 \
 		-o boot.bin \
-		boot.o
+		asm/boot.o
 
-boot.o: boot.s
+asm/boot.o: asm/boot.s
 	as \
 		--32 \
-		-o boot.o \
-		boot.s
+		-o asm/boot.o \
+		asm/boot.s
 
 	objcopy \
 		--remove-section=.note.gnu.property \
-		boot.o boot.o
+		asm/boot.o asm/boot.o
 
 clean:
-	rm boot.o boot.bin
+	rm asm/boot.o boot.bin
