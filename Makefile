@@ -1,4 +1,4 @@
-asm/boot.bin: asm/boot.o
+boot.bin: asm/boot.o
 	ld \
 		-Ttext=0x7c00 \
 		--oformat binary \
