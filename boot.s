@@ -57,6 +57,28 @@ print_hex:
 	call print
 	ret
 
+disk_load:
+	push %dx
+
+	mov $0x02, %ah
+	mov %dh, %al
+	mov $0, %ch
+	mov $0x02, %cl
+	mov $0, %dh
+	int $0x13
+
+	jc disk_error
+
+	pop %dx
+	cmp %al, %dh
+	jne disk_error
+	ret
+
+disk_error:
+	mov $DISK_ERROR_MSG, %si
+	call print_string
+	jmp .
+
 return:
 	ret
 
@@ -65,6 +87,9 @@ HEX_START:
 
 HEX_CODES:
 	.ascii "0123456789abcdef"
+
+DISK_ERROR_MSG:
+	.asciz "Disk read error!"
 
 	.space 510 - (. - _start)
 	.short 0xaa55
