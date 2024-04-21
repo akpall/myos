@@ -1,3 +1,4 @@
+	.code16
 HEX_CODES:
 	.ascii "0123456789abcdef"
 

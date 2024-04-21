@@ -1,3 +1,4 @@
+	.code16
 BOOT_DRIVE:
 	.byte 0
 
