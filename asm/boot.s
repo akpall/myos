@@ -8,29 +8,30 @@ _start:
 	mov $0x8000, %bp
 	mov %bp, %sp
 
-	# Load 2 sectors from BOOT_DRIVE into 0x9000
-	mov $0x9000, %bx
-	mov $2, %dh
-	mov BOOT_DRIVE, %dl
-	call disk_load
+	mov $MSG_REAL_MODE, %si
+	call print_string
 
-	# Print hex at 0x9000
-	mov $0x9000, %si
-	mov (%si), %dx
-	call print_hex
+	call switch_to_pm
 
-	# Print hex at 0x9000+512
-	mov $0x9000+512, %si
-	mov (%si), %dx
-	call print_hex
+	jmp .
+
+	.code32
+begin_pm:
+	mov $MSG_PROT_MODE, %ebx
+	call print_string_pm
 
 	jmp .
 
 # Include asm code from files here
 	.include "asm/print.s"
 	.include "asm/disk.s"
+	.include "asm/gdt.s"
+	.include "asm/pm.s"
 
 # Vars
+	.set CODE_SEG, gdt_code - gdt_start
+	.set DATA_SEG, gdt_data - gdt_start
+
 BOOT_DRIVE:
 	.byte 0
 
@@ -43,10 +44,12 @@ HEX_CODES:
 HEX_START:
 	.asciz "0x"
 
+MSG_PROT_MODE:
+	.asciz "Starting in 32-bit mode!"
+
+MSG_REAL_MODE:
+	.asciz "Starting in 16-bit mode!"
+
 # Pad until 510 and enter boot sector magic number
 	.space 510 - (. - _start)
 	.short 0xaa55
-
-# Filling, to test disk reading
-	.fill 256, 2, 0xdada
-	.fill 256, 2, 0xface
