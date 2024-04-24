@@ -1,10 +1,4 @@
 	.code16
-HEX_CODES:
-	.ascii "0123456789abcdef"
-
-HEX_START:
-	.asciz "0x"
-
 print:
 	mov $0x0e, %ah
 	int $0x10

@@ -30,6 +30,12 @@ BOOT_DRIVE:
 DISK_ERROR_MSG:
 	.asciz "Disk read error!"
 
+HEX_CODES:
+	.ascii "0123456789abcdef"
+
+HEX_START:
+	.asciz "0x"
+
 	.space 510 - (. - _start)
 	.short 0xaa55
 
