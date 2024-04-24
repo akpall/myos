@@ -1,4 +1,4 @@
-	.code16
+	.code16 ; Real mode code
 print:
 	mov $0x0e, %ah
 	int $0x10
@@ -7,7 +7,7 @@ print:
 print_hex:
 	mov $HEX_START, %si
 	call print_string
-	;;
+
 	mov %dx, %ax
 	and $0xf000, %ax
 	shr $12, %ax
@@ -15,7 +15,7 @@ print_hex:
 	mov %ax, %si
 	mov (%si),%ax
 	call print
-	;;
+
 	mov %dx, %ax
 	and $0xf00, %ax
 	shr $8, %ax
@@ -23,7 +23,7 @@ print_hex:
 	mov %ax, %si
 	mov (%si),%ax
 	call print
-	;;
+
 	mov %dx, %ax
 	and $0xf0, %ax
 	shr $4, %ax
@@ -31,17 +31,17 @@ print_hex:
 	mov %ax, %si
 	mov (%si),%ax
 	call print
-	;;
+
 	mov %dx, %ax
 	and $0xf, %ax
 	add $HEX_CODES, %ax
 	mov %ax, %si
 	mov (%si),%ax
 	call print
-	;;
+
 	mov $' ', %al
 	call print
-	;;
+
 	ret
 
 print_string:
