@@ -24,6 +24,12 @@ _start:
 	.include "asm/print.s"
 	.include "asm/disk.s"
 
+BOOT_DRIVE:
+	.byte 0
+
+DISK_ERROR_MSG:
+	.asciz "Disk read error!"
+
 	.space 510 - (. - _start)
 	.short 0xaa55
 

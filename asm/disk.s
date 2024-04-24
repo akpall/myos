@@ -1,10 +1,4 @@
 	.code16
-BOOT_DRIVE:
-	.byte 0
-
-DISK_ERROR_MSG:
-	.asciz "Disk read error!"
-
 disk_error:
 	mov $DISK_ERROR_MSG, %si
 	call print_string
