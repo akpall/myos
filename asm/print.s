@@ -1,4 +1,4 @@
-	.code16 ; Real mode code
+	.code16
 print:
 	mov $0x0e, %ah
 	int $0x10
@@ -54,7 +54,7 @@ print_string:
 print_string_null:
 	ret
 
-	.code32			; Protected mode code
+	.code32
 	.set VIDEO_MEMORY, 0xb8000
 	.set WHITE_ON_BLACK, 0x0f
 
