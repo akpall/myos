@@ -1,28 +1,28 @@
+CC = gcc
+CFLAGS = -Wall -Wextra -c -ffreestanding -fno-pie -m32
+LDFLAGS = --oformat binary -m elf_i386
+
 myos.bin: build/boot.bin build/kernel.bin
 	cat build/boot.bin build/kernel.bin > myos.bin
 
 build/boot.bin: build/boot.o
 	ld \
+		$(LDFLAGS) \
 		-Ttext=0x7c00 \
-		--oformat binary \
-		-m elf_i386 \
 		-o build/boot.bin \
 		build/boot.o
 
 build/kernel.bin: build/kernel.o
 	ld \
+		$(LDFLAGS) \
 		-Ttext=0x1000 \
-		--oformat binary \
-		-m elf_i386 \
 		-e kernel_main \
 		-o build/kernel.bin \
 		build/kernel.o
 
 build/boot.o: asm/boot.s
-	cc \
-		-m32 \
-		-c \
-		-fno-pie \
+	$(CC) \
+		$(CFLAGS) \
 		-o build/boot.o \
 		asm/boot.s
 	objcopy \
@@ -30,11 +30,8 @@ build/boot.o: asm/boot.s
 	 	build/boot.o build/boot.o
 
 build/kernel.o: c/kernel.c
-	cc \
-		-m32 \
-		-ffreestanding \
-		-fno-pie \
-		-c \
+	$(CC) \
+		$(CFLAGS) \
 		-o build/kernel.o \
 		c/kernel.c
 	objcopy \
