@@ -50,6 +50,9 @@ MSG_PROT_MODE:
 MSG_REAL_MODE:
 	.asciz "Starting in 16-bit mode!"
 
+MSG_LOAD_KERNEL:
+	.asciz "Loading kernel..."
+
 # Pad until 510 and enter boot sector magic number
 	.space 510 - (. - _start)
 	.short 0xaa55
