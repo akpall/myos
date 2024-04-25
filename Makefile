@@ -20,11 +20,11 @@ build/kernel.bin: build/kernel.o
 		-o build/kernel.bin \
 		build/kernel.o
 
-build/boot.o: asm/boot.s
+build/boot.o: boot/boot.s
 	$(CC) \
 		$(CFLAGS) \
 		-o build/boot.o \
-		asm/boot.s
+		boot/boot.s
 	objcopy \
 	 	--remove-section=.note.gnu.property \
 	 	build/boot.o build/boot.o

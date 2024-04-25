@@ -39,10 +39,10 @@ begin_pm:
 	jmp .
 
 # Include asm code from files here
-	.include "asm/print.s"
-	.include "asm/disk.s"
-	.include "asm/gdt.s"
-	.include "asm/pm.s"
+	.include "boot/print.s"
+	.include "boot/disk.s"
+	.include "boot/gdt.s"
+	.include "boot/pm.s"
 
 # Vars
 	.set CODE_SEG, gdt_code - gdt_start
