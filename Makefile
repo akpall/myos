@@ -29,11 +29,11 @@ build/boot.o: boot/boot.s
 	 	--remove-section=.note.gnu.property \
 	 	build/boot.o build/boot.o
 
-build/kernel.o: c/kernel.c
+build/kernel.o: kernel/kernel.c
 	$(CC) \
 		$(CFLAGS) \
 		-o build/kernel.o \
-		c/kernel.c
+		kernel/kernel.c
 	objcopy \
 		--remove-section=.note.gnu.property \
 		--remove-section=.eh_frame \
