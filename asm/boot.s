@@ -22,7 +22,7 @@ load_kernel:
 	call print_string
 
 	mov $KERNEL_OFFSET, %bx
-	mov $15, %dh
+	mov $1, %dh
 	mov BOOT_DRIVE, %dl
 	call disk_load
 
@@ -32,6 +32,9 @@ load_kernel:
 begin_pm:
 	mov $MSG_PROT_MODE, %ebx
 	call print_string_pm
+
+	mov $KERNEL_OFFSET, %ax
+	call %ax
 
 	jmp .
 
