@@ -11,9 +11,22 @@ _start:
 	mov $MSG_REAL_MODE, %si
 	call print_string
 
+	call load_kernel
+
 	call switch_to_pm
 
 	jmp .
+
+load_kernel:
+	mov $MSG_LOAD_KERNEL, %si
+	call print_string
+
+	mov $KERNEL_OFFSET, %bx
+	mov $15, %dh
+	mov BOOT_DRIVE, %dl
+	call disk_load
+
+	ret
 
 	.code32
 begin_pm:
@@ -31,6 +44,7 @@ begin_pm:
 # Vars
 	.set CODE_SEG, gdt_code - gdt_start
 	.set DATA_SEG, gdt_data - gdt_start
+	.set KERNEL_OFFSET, 0x1000
 
 BOOT_DRIVE:
 	.byte 0
