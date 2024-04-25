@@ -1,19 +1,41 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -c -ffreestanding -fno-pie -m32
-LDFLAGS = --oformat binary -m elf_i386
+LD = ld
+
+CFLAGS = \
+	-Wall \
+	-Wextra \
+	-c \
+	-ffreestanding \
+	-fno-pie \
+	-m32
+
+LDFLAGS = \
+	--oformat binary \
+	-m elf_i386
+
+CSRC = $(wildcard kernel/*.c)
+COBJ = ${subst .c,.o,${CSRC}}
 
 myos.bin: build/boot.bin build/kernel.bin
 	cat build/boot.bin build/kernel.bin > myos.bin
 
 build/boot.bin: build/boot.o
-	ld \
+	objcopy \
+	 	--remove-section=.note.gnu.property \
+	 	build/boot.o build/boot.o
+	$(LD) \
 		$(LDFLAGS) \
 		-Ttext=0x7c00 \
 		-o build/boot.bin \
 		build/boot.o
 
 build/kernel.bin: build/kernel.o
-	ld \
+	objcopy \
+		--remove-section=.note.gnu.property \
+		--remove-section=.eh_frame \
+		--remove-section=.comment \
+		build/kernel.o build/kernel.o
+	$(LD) \
 		$(LDFLAGS) \
 		-Ttext=0x1000 \
 		-e kernel_main \
@@ -25,20 +47,9 @@ build/boot.o: boot/boot.s
 		$(CFLAGS) \
 		-o build/boot.o \
 		boot/boot.s
-	objcopy \
-	 	--remove-section=.note.gnu.property \
-	 	build/boot.o build/boot.o
-
-build/kernel.o: kernel/kernel.c
-	$(CC) \
-		$(CFLAGS) \
-		-o build/kernel.o \
-		kernel/kernel.c
-	objcopy \
-		--remove-section=.note.gnu.property \
-		--remove-section=.eh_frame \
-		--remove-section=.comment \
-		build/kernel.o build/kernel.o
 
 clean:
-	rm build/boot.o build/boot.bin build/kernel.bin build/kernel.o myos.bin
+	rm -f build/* myos.bin
+
+build/%.o: kernel/%.c
+	$(CC) $(CFLAGS) -o $@ $<
