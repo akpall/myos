@@ -36,7 +36,7 @@ BOOT_DRIVE:
 	.byte 0
 
 DISK_ERROR_MSG:
-	.asciz "Disk read error!"
+	.asciz "Disk read error!\r\n"
 
 HEX_CODES:
 	.ascii "0123456789abcdef"
@@ -45,13 +45,13 @@ HEX_START:
 	.asciz "0x"
 
 MSG_PROT_MODE:
-	.asciz "Starting in 32-bit mode!"
+	.asciz "Starting in 32-bit mode!\r\n"
 
 MSG_REAL_MODE:
-	.asciz "Starting in 16-bit mode!"
+	.asciz "Starting in 16-bit mode!\r\n"
 
 MSG_LOAD_KERNEL:
-	.asciz "Loading kernel..."
+	.asciz "Loading kernel...\r\n"
 
 # Pad until 510 and enter boot sector magic number
 	.space 510 - (. - _start)
